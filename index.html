@@ -124,7 +124,7 @@
   .hero-photo img{width:100%; height:100%; object-fit:cover;}
   .hero-divider{display:block; width:100%; height:56px; margin-top:52px;}
   .stat-strip{background:var(--navy); position:relative;}
-  .page-banner{position:relative; overflow:hidden; padding:90px 0; min-height:82vh; display:flex; align-items:center; background-size:cover; background-position:center;}
+  .page-banner{position:relative; overflow:hidden; padding:90px 0; min-height:82vh; display:flex; align-items:center; background-size:cover; background-position:center; background-color:var(--navy);}
   .page-banner::after{content:''; position:absolute; inset:0; opacity:.35; pointer-events:none; z-index:1;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cg fill='none' stroke='%23f0be3f' stroke-width='1' opacity='0.10'%3E%3Cpath d='M42 4 L80 42 L42 80 L4 42 Z'/%3E%3Ccircle cx='42' cy='42' r='5'/%3E%3C/g%3E%3C/svg%3E");
     background-size:84px 84px;
@@ -306,8 +306,7 @@
   .footer-tag{color:var(--gold); font-size:.78rem; font-weight:700; letter-spacing:.02em;}
   .footer-bottom{border-top:1px solid rgba(255,255,255,.1); margin-top:40px; padding-top:20px; text-align:center; font-size:.8rem; color:#7f8ba0;}
 
-  @media(max-width:920px){
-    .menu-toggle{display:none;}
+  @media(max-width:1180px){
     .topbar-ctas .btn-whatsapp{display:none;}
     .hero-inner{grid-template-columns:1fr;}
     .hero-photo{order:-1;}
@@ -353,7 +352,7 @@
   nav.mainnav a:hover::after{transform:scaleX(1);}
   nav.mainnav a.active{color:var(--gold-dark);}
   nav.mainnav a.active::after{transform:scaleX(1);}
-  @media(max-width:920px){
+  @media(max-width:1180px){
     nav.mainnav{order:3; width:100%; padding-bottom:6px; display:flex !important;}
     .topbar-inner{flex-wrap:wrap;}
   }
@@ -392,8 +391,6 @@
       <a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;" data-page="vie-scolaire">Vie scolaire</a>
       <a href="javascript:void(0)" onclick="goPage('admissions');return false;" data-page="admissions">Admissions</a>
       <a href="javascript:void(0)" onclick="goPage('parents');return false;" data-page="parents">Parents</a>
-      <a href="javascript:void(0)" onclick="goPage('partenaires');return false;" data-page="partenaires">Partenaires</a>
-      <a href="javascript:void(0)" onclick="goPage('actualites');return false;" data-page="actualites">Actualités</a>
       <a href="javascript:void(0)" onclick="goPage('contact');return false;" data-page="contact">Contact</a>
     </nav>
     <div class="topbar-ctas">
@@ -713,19 +710,6 @@
   </div>
 </section>
 
-
-</div>
-
-<div class="page" id="page-actualites">
-
-<section class="page-banner bgi-actualites" style="background-position:center 20%;">
-  <div class="wrap">
-    <span class="eyebrow">ACTUALITÉS</span>
-    <h2>Le journal du Groupe Scolaire</h2>
-    <p class="lede">Rentrée, sorties, kermesses et vie de classe : suivez l'actualité de l'école.</p>
-  </div>
-</section>
-
 <section id="actualites">
   <div class="wrap">
     <span class="eyebrow">ACTUALITÉS</span>
@@ -829,13 +813,13 @@
 
 </div>
 
-<div class="page" id="page-partenaires">
+<div class="page" id="page-contact">
 
-<section class="page-banner bgi-admissions">
+<section class="page-banner" style="background:radial-gradient(ellipse 60% 70% at 80% 20%, rgba(240,190,63,.22), transparent 60%), linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);">
   <div class="wrap">
-    <span class="eyebrow">PARTENAIRES</span>
-    <h2>Une communauté qui grandit ensemble</h2>
-    <p class="lede">Familles, quartier et partenaires : ensemble au service de l'enfance.</p>
+    <span class="eyebrow">CONTACT</span>
+    <h2>Parlons de l'avenir de votre enfant</h2>
+    <p class="lede">Partenaires, témoignages, questions fréquentes et coordonnées de l'établissement.</p>
   </div>
 </section>
 
@@ -868,20 +852,6 @@
       <div class="partner-card"><span class="ico">🎉</span><div><h4>PARTENAIRE ÉVÉNEMENTIEL</h4><p style="font-size:.87rem;">Accompagner les grands rendez-vous de la vie scolaire.</p></div></div>
       <div class="partner-card"><span class="ico">🌱</span><div><h4>PARTENAIRE RSE &amp; ÉDUCATION</h4><p style="font-size:.87rem;">Construire des actions durables autour de l'enfance et de l'éducation.</p></div></div>
     </div>
-    <div class="center" style="margin-top:32px;"><a href="javascript:void(0)" onclick="goPage('contact');return false;" class="btn btn-gold">Devenir partenaire</a></div>
-  </div>
-</section>
-
-
-</div>
-
-<div class="page" id="page-contact">
-
-<section class="page-banner bgi-hero">
-  <div class="wrap">
-    <span class="eyebrow">CONTACT</span>
-    <h2>Parlons de l'avenir de votre enfant</h2>
-    <p class="lede">Témoignages, questions fréquentes et coordonnées de l'établissement.</p>
   </div>
 </section>
 
@@ -966,8 +936,8 @@
       </div>
       <div><h5>L'École</h5><ul><li><a href="javascript:void(0)" onclick="goPage('ecole');return false;">Présentation</a></li><li><a href="javascript:void(0)" onclick="goPage('ecole');return false;">Notre histoire</a></li><li><a href="javascript:void(0)" onclick="goPage('ecole');return false;">Mot du Directeur</a></li><li><a href="javascript:void(0)" onclick="goPage('pedagogie');return false;">Projet éducatif</a></li><li><a href="javascript:void(0)" onclick="goPage('ecole');return false;">Notre équipe</a></li></ul></div>
       <div><h5>Scolarité</h5><ul><li><a href="javascript:void(0)" onclick="goPage('pedagogie');return false;">Préscolaire</a></li><li><a href="javascript:void(0)" onclick="goPage('pedagogie');return false;">Élémentaire</a></li><li><a href="javascript:void(0)" onclick="goPage('admissions');return false;">Admissions</a></li><li><a href="javascript:void(0)" onclick="goPage('admissions');return false;">Documents</a></li></ul></div>
-      <div><h5>Vie scolaire</h5><ul><li><a href="javascript:void(0)" onclick="goPage('actualites');return false;">Actualités</a></li><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Activités</a></li><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Sorties</a></li><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Galerie</a></li></ul></div>
-      <div><h5>Communauté</h5><ul><li><a href="javascript:void(0)" onclick="goPage('parents');return false;">Parents</a></li><li><a href="javascript:void(0)" onclick="goPage('partenaires');return false;">Partenaires</a></li><li><a href="javascript:void(0)" onclick="goPage('partenaires');return false;">Partenaires de l'Enfance</a></li><li><a href="javascript:void(0)" onclick="goPage('contact');return false;">Contact</a></li></ul></div>
+      <div><h5>Vie scolaire</h5><ul><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Actualités</a></li><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Activités</a></li><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Sorties</a></li><li><a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;">Galerie</a></li></ul></div>
+      <div><h5>Communauté</h5><ul><li><a href="javascript:void(0)" onclick="goPage('parents');return false;">Parents</a></li><li><a href="javascript:void(0)" onclick="goPage('contact');return false;">Partenaires</a></li><li><a href="javascript:void(0)" onclick="goPage('contact');return false;">Partenaires de l'Enfance</a></li><li><a href="javascript:void(0)" onclick="goPage('contact');return false;">Contact</a></li></ul></div>
     </div>
     <div class="footer-bottom">© 2026 Groupe Scolaire Saint Jean-Baptiste — Grand Yoff, Dakar. Tous droits réservés.</div>
   </div>
