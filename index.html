@@ -59,6 +59,14 @@
   nav.mainnav a{white-space:nowrap;}
   nav.mainnav a{padding:10px 13px; font-size:.86rem; font-weight:600; color:var(--navy); border-radius:8px; white-space:nowrap;}
   nav.mainnav a:hover{background:var(--cream);}
+  .nav-item{position:relative; display:inline-flex;}
+  .nav-item > a{display:inline-flex; align-items:center; gap:5px;}
+  .nav-caret{transition:transform .18s ease; flex-shrink:0;}
+  .nav-item.open .nav-caret{transform:rotate(180deg);}
+  .nav-submenu{position:fixed; margin-top:6px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 16px 32px -12px rgba(12,39,81,.25); padding:6px; min-width:220px; display:none; z-index:200; flex-direction:column;}
+  .nav-submenu a{padding:9px 14px; font-size:.85rem; font-weight:600; color:var(--navy); border-radius:7px; white-space:nowrap;}
+  .nav-submenu a:hover{background:var(--cream); color:var(--gold-dark);}
+  .nav-item.open .nav-submenu{display:flex;}
   .topbar-ctas{display:flex; gap:8px; flex-shrink:0;}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:10px; font-weight:700; font-size:.85rem; border:1.5px solid transparent; cursor:pointer; white-space:nowrap; transition:transform .16s ease, box-shadow .16s ease, background .16s ease;}
   .btn-gold{background:var(--gold); color:var(--navy-dark); box-shadow:0 10px 22px -8px rgba(227,165,49,.55);}
@@ -355,6 +363,7 @@
   @media(max-width:1180px){
     nav.mainnav{order:3; width:100%; padding-bottom:6px; display:flex !important;}
     .topbar-inner{flex-wrap:wrap;}
+    .nav-submenu{min-width:200px;}
   }
 
   /* page system (onglets glissants, comme l'autre école) */
@@ -386,12 +395,51 @@
     </a>
     <nav class="mainnav">
       <a href="javascript:void(0)" onclick="goPage('accueil');return false;" data-page="accueil">Accueil</a>
-      <a href="javascript:void(0)" onclick="goPage('ecole');return false;" data-page="ecole">L'École</a>
-      <a href="javascript:void(0)" onclick="goPage('pedagogie');return false;" data-page="pedagogie">Pédagogie</a>
-      <a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;" data-page="vie-scolaire">Vie scolaire</a>
-      <a href="javascript:void(0)" onclick="goPage('admissions');return false;" data-page="admissions">Admissions</a>
+      <div class="nav-item">
+        <a href="javascript:void(0)" onclick="goPage('ecole');return false;" data-page="ecole">L'École <svg class="nav-caret" width="9" height="6" viewBox="0 0 9 6" fill="none"><path d="M1 1L4.5 4.5L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-submenu">
+          <a href="javascript:void(0)" onclick="goPage('ecole');scrollToSection('ecole');return false;">Présentation</a>
+          <a href="javascript:void(0)" onclick="goPage('ecole');scrollToSection('histoire');return false;">Notre histoire</a>
+          <a href="javascript:void(0)" onclick="goPage('ecole');scrollToSection('directeur');return false;">Mot du Directeur</a>
+          <a href="javascript:void(0)" onclick="goPage('ecole');scrollToSection('equipe');return false;">Notre équipe</a>
+          <a href="javascript:void(0)" onclick="goPage('ecole');scrollToSection('pourquoi');return false;">Pourquoi nous choisir</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="javascript:void(0)" onclick="goPage('pedagogie');return false;" data-page="pedagogie">Pédagogie <svg class="nav-caret" width="9" height="6" viewBox="0 0 9 6" fill="none"><path d="M1 1L4.5 4.5L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-submenu">
+          <a href="javascript:void(0)" onclick="goPage('pedagogie');scrollToSection('pedagogie');return false;">Notre mission</a>
+          <a href="javascript:void(0)" onclick="goPage('pedagogie');scrollToSection('projet-educatif');return false;">Projet éducatif</a>
+          <a href="javascript:void(0)" onclick="goPage('pedagogie');scrollToSection('valeurs');return false;">Nos valeurs</a>
+          <a href="javascript:void(0)" onclick="goPage('pedagogie');scrollToSection('cycles');return false;">Nos cycles</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="javascript:void(0)" onclick="goPage('vie-scolaire');return false;" data-page="vie-scolaire">Vie scolaire <svg class="nav-caret" width="9" height="6" viewBox="0 0 9 6" fill="none"><path d="M1 1L4.5 4.5L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-submenu">
+          <a href="javascript:void(0)" onclick="goPage('vie-scolaire');scrollToSection('vie-scolaire');return false;">Fêtes &amp; activités</a>
+          <a href="javascript:void(0)" onclick="goPage('vie-scolaire');scrollToSection('sorties');return false;">Sorties pédagogiques</a>
+          <a href="javascript:void(0)" onclick="goPage('vie-scolaire');scrollToSection('sport');return false;">Sport</a>
+          <a href="javascript:void(0)" onclick="goPage('vie-scolaire');scrollToSection('galerie');return false;">Galerie</a>
+          <a href="javascript:void(0)" onclick="goPage('vie-scolaire');scrollToSection('actualites');return false;">Actualités</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="javascript:void(0)" onclick="goPage('admissions');return false;" data-page="admissions">Admissions <svg class="nav-caret" width="9" height="6" viewBox="0 0 9 6" fill="none"><path d="M1 1L4.5 4.5L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-submenu">
+          <a href="javascript:void(0)" onclick="goPage('admissions');scrollToSection('admissions');return false;">Étapes d'inscription</a>
+          <a href="javascript:void(0)" onclick="goPage('admissions');scrollToSection('documents');return false;">Documents</a>
+        </div>
+      </div>
       <a href="javascript:void(0)" onclick="goPage('parents');return false;" data-page="parents">Parents</a>
-      <a href="javascript:void(0)" onclick="goPage('contact');return false;" data-page="contact">Contact</a>
+      <div class="nav-item">
+        <a href="javascript:void(0)" onclick="goPage('contact');return false;" data-page="contact">Contact <svg class="nav-caret" width="9" height="6" viewBox="0 0 9 6" fill="none"><path d="M1 1L4.5 4.5L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-submenu">
+          <a href="javascript:void(0)" onclick="goPage('contact');scrollToSection('partenaires');return false;">Partenaires</a>
+          <a href="javascript:void(0)" onclick="goPage('contact');scrollToSection('faq-section');return false;">FAQ</a>
+          <a href="javascript:void(0)" onclick="goPage('contact');scrollToSection('contact');return false;">Formulaire de contact</a>
+        </div>
+      </div>
     </nav>
     <div class="topbar-ctas">
       <a href="javascript:void(0)" onclick="ouvrirInscription();return false;" class="btn btn-gold btn-gold-pulse">Inscrire mon enfant</a>
@@ -457,7 +505,7 @@
 </section>
 
 
-<section class="section-alt">
+<section class="section-alt" id="histoire">
   <div class="wrap">
     <span class="eyebrow">NOTRE HISTOIRE</span>
     <h2>Une histoire construite au service de la communauté</h2>
@@ -473,7 +521,7 @@
 </section>
 
 
-<section>
+<section id="directeur">
   <div class="wrap two-col">
     <div class="photo-ph"><span class="ph-icon">✒️</span><span class="ph-label">Photo du directeur à venir</span></div>
     <div>
@@ -491,7 +539,7 @@
 </section>
 
 
-<section class="section-alt">
+<section class="section-alt" id="equipe">
   <div class="wrap">
     <span class="eyebrow">NOTRE ÉQUIPE</span>
     <h2>Une équipe engagée derrière chaque enfant</h2>
@@ -518,7 +566,7 @@
 </section>
 
 
-<section>
+<section id="pourquoi">
   <div class="wrap">
     <span class="eyebrow">POURQUOI CHOISIR SAINT JEAN-BAPTISTE ?</span>
     <h2>Plus qu'une école : un accompagnement</h2>
@@ -565,7 +613,7 @@
 </section>
 
 
-<section>
+<section id="projet-educatif">
   <div class="wrap">
     <span class="eyebrow">NOTRE PROJET ÉDUCATIF</span>
     <h2>Former l'enfant dans toutes ses dimensions</h2>
@@ -582,7 +630,7 @@
 </section>
 
 
-<section class="section-alt">
+<section class="section-alt" id="valeurs">
   <div class="wrap">
     <span class="eyebrow">NOS VALEURS</span>
     <h2>Les valeurs qui nous guident</h2>
@@ -598,7 +646,7 @@
 </section>
 
 
-<section>
+<section id="cycles">
   <div class="wrap">
     <span class="eyebrow">NOS CYCLES</span>
     <h2>Un parcours éducatif de 2 à 14 ans</h2>
@@ -658,7 +706,7 @@
 </section>
 
 
-<section class="section-alt">
+<section class="section-alt" id="sorties">
   <div class="wrap two-col">
     <div>
       <span class="eyebrow">SORTIES PÉDAGOGIQUES</span>
@@ -676,7 +724,7 @@
   </div>
 </section>
 
-<section>
+<section id="sport">
   <div class="wrap two-col">
     <div class="photo-ph"><span class="ph-icon">⚽</span><span class="ph-label">Photo à venir</span></div>
     <div>
@@ -690,7 +738,7 @@
 </section>
 
 
-<section class="section-alt">
+<section class="section-alt" id="galerie">
   <div class="wrap">
     <span class="eyebrow">GALERIE</span>
     <h2>Saint Jean-Baptiste en images</h2>
@@ -790,7 +838,7 @@
 </section>
 
 
-<section class="section-alt">
+<section class="section-alt" id="documents">
   <div class="wrap">
     <span class="eyebrow">DOCUMENTS &amp; INFORMATIONS PRATIQUES</span>
     <h2>Tout ce dont les familles ont besoin</h2>
@@ -866,7 +914,7 @@
 </section>
 
 
-<section>
+<section id="faq-section">
   <div class="wrap" style="max-width:820px;">
     <span class="eyebrow">FAQ</span>
     <h2>Questions fréquentes</h2>
@@ -1027,13 +1075,56 @@
     document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
     var el = document.getElementById('page-' + id);
     if(el){ el.classList.add('active'); }
-    document.querySelectorAll('nav.mainnav a').forEach(function(a){
+    document.querySelectorAll('nav.mainnav a[data-page]').forEach(function(a){
       a.classList.toggle('active', a.dataset.page === id);
     });
+    closeAllNavSubmenus();
     window.scrollTo({top:0, behavior:'smooth'});
   }
   // alias pour compatibilité
   function goAnchor(id){ goPage(id); }
+
+  function scrollToSection(sectionId){
+    closeAllNavSubmenus();
+    setTimeout(function(){
+      var target = document.getElementById(sectionId);
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    }, 120);
+  }
+
+  function closeAllNavSubmenus(){
+    document.querySelectorAll('.nav-item.open').forEach(function(item){ item.classList.remove('open'); });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.nav-item').forEach(function(item){
+      var link = item.querySelector('a[data-page]');
+      var caret = item.querySelector('.nav-caret');
+      var submenu = item.querySelector('.nav-submenu');
+      if(caret){
+        caret.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          var isOpen = item.classList.contains('open');
+          closeAllNavSubmenus();
+          if(!isOpen && submenu){
+            var rect = link.getBoundingClientRect();
+            var menuWidth = Math.max(submenu.offsetWidth, 220);
+            var left = Math.min(rect.left, window.innerWidth - menuWidth - 12);
+            left = Math.max(left, 12);
+            submenu.style.top = rect.bottom + 'px';
+            submenu.style.left = left + 'px';
+            item.classList.add('open');
+          }
+        });
+      }
+    });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.nav-item')){ closeAllNavSubmenus(); }
+    });
+    window.addEventListener('resize', closeAllNavSubmenus);
+    window.addEventListener('scroll', closeAllNavSubmenus);
+  });
 
   function ouvrirInscription(){
     document.getElementById('inscOverlay').classList.add('open');
