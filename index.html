@@ -67,6 +67,7 @@
   .nav-submenu a{padding:9px 14px; font-size:.85rem; font-weight:600; color:var(--navy); border-radius:7px; white-space:nowrap;}
   .nav-submenu a:hover{background:var(--cream); color:var(--gold-dark);}
   .nav-item.open .nav-submenu{display:flex;}
+  .nav-submenu.open{display:flex;}
   .topbar-ctas{display:flex; gap:8px; flex-shrink:0;}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:10px; font-weight:700; font-size:.85rem; border:1.5px solid transparent; cursor:pointer; white-space:nowrap; transition:transform .16s ease, box-shadow .16s ease, background .16s ease;}
   .btn-gold{background:var(--gold); color:var(--navy-dark); box-shadow:0 10px 22px -8px rgba(227,165,49,.55);}
@@ -1094,6 +1095,7 @@
 
   function closeAllNavSubmenus(){
     document.querySelectorAll('.nav-item.open').forEach(function(item){ item.classList.remove('open'); });
+    document.querySelectorAll('.nav-submenu.open').forEach(function(sub){ sub.classList.remove('open'); });
   }
 
   document.addEventListener('DOMContentLoaded', function(){
@@ -1101,6 +1103,12 @@
       var link = item.querySelector('a[data-page]');
       var caret = item.querySelector('.nav-caret');
       var submenu = item.querySelector('.nav-submenu');
+      if(submenu){
+        // Détache le sous-menu du header (position:sticky) et le rattache au body
+        // pour éviter un bug Safari/iOS où position:fixed imbriqué dans
+        // position:sticky ne s'affiche pas correctement.
+        document.body.appendChild(submenu);
+      }
       if(caret){
         caret.addEventListener('click', function(e){
           e.preventDefault();
@@ -1115,12 +1123,13 @@
             submenu.style.top = rect.bottom + 'px';
             submenu.style.left = left + 'px';
             item.classList.add('open');
+            submenu.classList.add('open');
           }
         });
       }
     });
     document.addEventListener('click', function(e){
-      if(!e.target.closest('.nav-item')){ closeAllNavSubmenus(); }
+      if(!e.target.closest('.nav-item') && !e.target.closest('.nav-submenu')){ closeAllNavSubmenus(); }
     });
     window.addEventListener('resize', closeAllNavSubmenus);
     window.addEventListener('scroll', closeAllNavSubmenus);
