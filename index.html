@@ -375,10 +375,13 @@
   nav.mainnav a:hover::after{transform:scaleX(1);}
   nav.mainnav a.active{color:var(--gold-dark);}
   nav.mainnav a.active::after{transform:scaleX(1);}
-  @media(max-width:1180px){
-    nav.mainnav{order:3; width:100%; padding-bottom:6px; display:flex !important;}
-    .topbar-inner{flex-wrap:wrap;}
-    .nav-subbar-inner{padding:12px 16px;}
+  nav.mainnav{order:3; width:100%; padding-bottom:6px;}
+  .topbar-inner{flex-wrap:wrap;}
+  .nav-subbar-inner{padding:12px 16px;}
+  @media(max-width:1480px) and (min-width:521px){
+    .brand img{width:80px; height:80px;}
+    .brand-logo-wrap::before{inset:-7px;}
+    .brand-text strong{font-size:1.15rem;}
   }
 
   /* page system (onglets glissants, comme l'autre école) */
