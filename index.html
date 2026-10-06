@@ -239,12 +239,17 @@
   .team-card ul{padding-left:18px; color:var(--muted); font-size:.88rem; margin:0;}
   .team-card li{margin-bottom:4px;}
 
-  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:30px;}
-  .gallery-grid img{border-radius:14px; height:340px; object-fit:cover; width:100%; cursor:zoom-in; box-shadow:0 8px 24px rgba(11,33,88,.18); transition:transform .25s;}
+  .gallery-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:30px;}
+  .gallery-grid img{border-radius:14px; height:480px; object-fit:cover; width:100%; cursor:zoom-in; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none; -webkit-user-drag:none; box-shadow:0 8px 24px rgba(11,33,88,.18); transition:transform .25s;}
   .gallery-grid img:hover{transform:scale(1.02);}
   #lightbox{display:none; position:fixed; inset:0; background:rgba(6,22,56,.94); z-index:9999; align-items:center; justify-content:center; padding:16px; cursor:zoom-out;}
   #lightbox.open{display:flex;}
-  #lightbox img{max-width:100%; max-height:100%; border-radius:10px; object-fit:contain;}
+  #lightbox .lb-pic{width:100%; height:100%; background:center/contain no-repeat; -webkit-touch-callout:none; user-select:none;}
+  .gal-item{position:relative;}
+  .gal-item.hide{display:none;}
+  .gal-item::after{content:''; position:absolute; inset:0; border-radius:14px; background:transparent;}
+  .gal-item img{display:block; pointer-events:none;}
+  .gal-item .wm{position:absolute; right:14px; bottom:12px; z-index:2; color:rgba(255,255,255,.85); font:700 .8rem 'Plus Jakarta Sans',sans-serif; text-shadow:0 1px 4px rgba(0,0,0,.7); pointer-events:none;}
   .filter-pills{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
   .pill{cursor:pointer; user-select:none; transition:background .15s ease, color .15s ease, border-color .15s ease;}
   .badge-soon{display:inline-block; margin-top:10px; background:var(--gold); color:var(--navy-dark); font-weight:700; font-size:.72rem; padding:4px 12px; border-radius:20px;}
@@ -356,8 +361,8 @@
     .value-grid{grid-template-columns:repeat(2,1fr);}
     .cycle-grid{grid-template-columns:1fr;}
     .team-grid{grid-template-columns:1fr;}
-    .gallery-grid{grid-template-columns:repeat(2,1fr);}
-    .gallery-grid img,.gallery-ph{height:280px;}
+    .gallery-grid{grid-template-columns:1fr;}
+    .gallery-grid img,.gallery-ph{height:380px;}
     .step-row{grid-template-columns:1fr 1fr;}
     .doc-list{grid-template-columns:1fr;}
     .partner-grid{grid-template-columns:1fr;}
@@ -1282,9 +1287,20 @@
     });
   }
 </script>
-<div id="lightbox" onclick="this.classList.remove('open')"><img alt=""></div>
+<div id="lightbox" onclick="this.classList.remove('open')"><div class="lb-pic"></div></div>
 <script>
-document.addEventListener('click',function(e){var t=e.target;if(t.tagName==='IMG'&&t.closest('#galleryGrid')){var lb=document.getElementById('lightbox');lb.querySelector('img').src=t.src;lb.classList.add('open');}});
+(function(){
+  function wrap(){document.querySelectorAll('#galleryGrid img').forEach(function(im){
+    if(im.parentNode.classList.contains('gal-item'))return;
+    im.setAttribute('draggable','false');
+    var w=document.createElement('div');w.className='gal-item';w.setAttribute('data-cat',im.getAttribute('data-cat')||'');
+    im.removeAttribute('data-cat');im.parentNode.insertBefore(w,im);w.appendChild(im);
+    var m=document.createElement('span');m.className='wm';m.textContent='© Saint Jean-Baptiste';w.appendChild(m);});}
+  wrap();
+  document.addEventListener('click',function(e){var w=e.target.closest&&e.target.closest('.gal-item');if(w){var lb=document.getElementById('lightbox');lb.querySelector('.lb-pic').style.backgroundImage='url('+w.querySelector('img').src+')';lb.classList.add('open');}});
+  ['contextmenu','dragstart','selectstart'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target.closest&&e.target.closest('#galleryGrid, #lightbox'))e.preventDefault();});});
+  document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&(e.key==='s'||e.key==='S')&&document.getElementById('galleryGrid').offsetParent)e.preventDefault();});
+})();
 </script>
 </body>
 </html>
