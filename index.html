@@ -310,6 +310,11 @@
   .insc-drawer-close{background:rgba(255,255,255,.12); border:none; color:#fff; font-size:1.3rem; line-height:1; cursor:pointer; padding:4px 12px; border-radius:8px;}
   .insc-drawer-close:hover{background:rgba(255,255,255,.22);}
   .insc-drawer-body{padding:26px;}
+  .insc-head-id{display:flex; align-items:center; gap:14px; min-width:0;}
+  .insc-logo{width:64px; height:64px; border-radius:50%; flex-shrink:0; background:#fff; box-shadow:0 0 0 3px #fff, 0 0 0 5px var(--gold); pointer-events:none; -webkit-touch-callout:none; user-select:none;}
+  .insc-grid > *{min-width:0;}
+  .insc-field{min-width:0;}
+  .insc-field input, .insc-field select, .insc-field textarea{width:100%; min-width:0; max-width:100%;}
   .insc-docs{background:var(--gold-pale); border:1px solid #ecd6a0; border-radius:12px; padding:18px 20px; margin-bottom:26px;}
   .insc-docs h4{margin:0 0 10px; font-family:var(--sans); font-size:.85rem; color:var(--navy); text-transform:uppercase; letter-spacing:.03em;}
   .insc-docs ul{margin:0; padding-left:18px; font-size:.86rem; color:var(--ink);}
@@ -406,6 +411,16 @@
     .brand img{width:80px; height:80px;}
     .brand-logo-wrap::before{inset:-7px;}
     .brand-text strong{font-size:1.15rem;}
+  }
+  /* ordinateur : logo bien visible, boutons à droite */
+  @media(min-width:901px){
+    .brand img{width:112px; height:112px;}
+    .brand-logo-wrap::before{inset:-9px;}
+    .brand-text strong{font-size:1.4rem;}
+    .brand-text span{font-size:.8rem;}
+    .topbar-inner{padding:14px 24px 6px;}
+    .topbar-ctas{margin-left:auto;}
+    nav.mainnav{margin-left:0; justify-content:center;}
   }
 
   /* page system (onglets glissants, comme l'autre école) */
@@ -1039,9 +1054,12 @@
 <div class="insc-overlay" id="inscOverlay" onclick="fermerInscription()"></div>
 <div class="insc-drawer" id="inscDrawer">
   <div class="insc-drawer-head">
-    <div>
-      <h3>Demande d'inscription</h3>
-      <span>Centre Saint Jean-Baptiste</span>
+    <div class="insc-head-id">
+      <img class="insc-logo" id="inscLogo" alt="" draggable="false">
+      <div>
+        <h3>Demande d'inscription</h3>
+        <span>Centre Saint Jean-Baptiste</span>
+      </div>
     </div>
     <button class="insc-drawer-close" onclick="fermerInscription()" aria-label="Fermer">✕</button>
   </div>
@@ -1302,6 +1320,9 @@
   ['contextmenu','dragstart','selectstart'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target.closest&&e.target.closest('#galleryGrid, #lightbox'))e.preventDefault();});});
   document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&(e.key==='s'||e.key==='S')&&document.getElementById('galleryGrid').offsetParent)e.preventDefault();});
 })();
+</script>
+<script>
+(function(){var h=document.querySelector('.brand img'),d=document.getElementById('inscLogo');if(h&&d)d.src=h.src;})();
 </script>
 </body>
 </html>
